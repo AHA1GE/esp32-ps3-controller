@@ -70,7 +70,7 @@ void ps3_spp_init()
         return;
     }
 
-    if ((ret = esp_spp_init(ESP_SPP_MODE_CB)) != ESP_OK) {
+    if ((ret = esp_spp_enhanced_init(ESP_SPP_MODE_CB)) != ESP_OK) {
         ESP_LOGE(PS3_TAG, "%s spp init failed: %s\n", __func__, esp_err_to_name(ret));
         return;
     }
@@ -139,7 +139,7 @@ static void ps3_spp_callback(esp_spp_cb_event_t event, esp_spp_cb_param_t *param
 {
     if (event == ESP_SPP_INIT_EVT) {
         ESP_LOGI(PS3_TAG, "ESP_SPP_INIT_EVT");
-        esp_bt_dev_set_device_name(PS3_DEVICE_NAME);
+        esp_bt_gap_set_device_name(PS3_DEVICE_NAME);
 
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 0, 0)
         esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE, ESP_BT_NON_DISCOVERABLE);
